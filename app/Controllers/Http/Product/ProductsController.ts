@@ -1,28 +1,27 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import User from 'App/Models/User'
+import Product from 'App/Models/Product'
 
-export default class UsersController {
+export default class ProductsController {
     public async index({ request, response }: HttpContextContract) {
         const { id } = request.body()
 
         console.log(id)
 
-        const users = await User.query()
+        const products = await Product.query()
 
-        if (!users) return response.notFound()
+        if (!products) return response.notFound()
 
-        return response.ok(users)
+        return response.ok(products)
     }
     public async store({ request, response }: HttpContextContract) {
-        const { name, email, password } = request.body()
+        const { description, price } = request.body()
 
         try {
-            const user = await User.create({
-                name,
-                email,
-                password
+            const product = await Product.create({
+                description,
+                price
             })
-            return response.ok(user)
+            return response.ok(product)
         } catch (error) {
             return response.internalServerError(error.message)
         }
@@ -30,25 +29,23 @@ export default class UsersController {
     public async show({ request, response }: HttpContextContract) {
         const { id } = request.params()
 
-        const user = await User.find(id)
+        const product = await Product.find(id)
 
-        if (!user) return response.notFound()
+        if (!product) return response.notFound()
 
-        return response.ok(user)
+        return response.ok(product)
     }
     public async update({ request, response }: HttpContextContract) {
         const { id } = request.params()
-        const { name, email, password } = request.body()
+        const { description, price } = request.body()
 
         try {
-            const user = await User.findOrFail(id)
+            const product = await Product.findOrFail(id)
 
-            if(name) user.name = name
-            if(email) user.email = email
-            if(password) user.password = password
-
+            if(description) product.description = description
+            if(price) product.price = price
         
-            return response.ok(await user.save())
+            return response.ok(await product.save())
         }
         catch(error) {
             return response.internalServerError(error.message)
@@ -58,14 +55,15 @@ export default class UsersController {
         const { id } = request.params()
 
         try {
-            const user = await User.findOrFail(id)
-            await user.delete()
-            return response.ok(user)
+            const product = await Product.findOrFail(id)
+            await product.delete()
+            return response.ok(product)
         }
         catch(error) {
             return response.internalServerError(error.message)
         }
         
     }
-    
+
+
 }

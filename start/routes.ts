@@ -19,6 +19,8 @@
 */
 
 import './routes/user'
+import './routes/product'
+import './routes/order'
 
 import Route from '@ioc:Adonis/Core/Route'
 
