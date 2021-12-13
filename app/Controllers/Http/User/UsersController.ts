@@ -9,20 +9,6 @@ export default class UsersController {
 
         return response.ok(users)
     }
-    public async store({ request, response }: HttpContextContract) {
-        const { name, email, password } = request.body()
-
-        try {
-            const user = await User.create({
-                name,
-                email,
-                password
-            })
-            return response.ok(user)
-        } catch (error) {
-            return response.internalServerError(error.message)
-        }
-    }
     public async show({ request, response }: HttpContextContract) {
         const { id } = request.params()
 

@@ -15,6 +15,9 @@ export default class Order extends BaseModel {
     @column()
     public total: number
 
+    @column()
+    public userId: number
+
     @column.dateTime({ autoCreate: true })
     public createdAt: DateTime
 

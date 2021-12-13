@@ -8,6 +8,12 @@ export default class Orders extends BaseSchema {
             table.increments('id')
 
             table.double('total').notNullable()
+            table.integer('user_id')
+            .unsigned()
+            .references('id')
+            .inTable('users')
+            .onUpdate('CASCADE')
+            .onDelete('CASCADE')
 
             /**
              * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
