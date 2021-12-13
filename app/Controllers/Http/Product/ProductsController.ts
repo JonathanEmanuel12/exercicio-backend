@@ -2,11 +2,7 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Product from 'App/Models/Product'
 
 export default class ProductsController {
-    public async index({ request, response }: HttpContextContract) {
-        const { id } = request.body()
-
-        console.log(id)
-
+    public async index({ response }: HttpContextContract) {
         const products = await Product.query()
 
         if (!products) return response.notFound()

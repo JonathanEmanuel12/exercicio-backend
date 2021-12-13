@@ -9,7 +9,7 @@ export default class Product extends BaseModel {
   public description: string 
 
   @column()
-  public price: string
+  public price: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

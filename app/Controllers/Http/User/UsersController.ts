@@ -2,11 +2,7 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import User from 'App/Models/User'
 
 export default class UsersController {
-    public async index({ request, response }: HttpContextContract) {
-        const { id } = request.body()
-
-        console.log(id)
-
+    public async index({ response }: HttpContextContract) {
         const users = await User.query()
 
         if (!users) return response.notFound()

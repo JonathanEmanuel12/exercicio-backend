@@ -7,7 +7,7 @@ export default class Order extends BaseModel {
     @manyToMany(() => Product, {
         pivotTable: 'items'
     })
-    public itens: ManyToMany<typeof Product>
+    public items: ManyToMany<typeof Product>
 
     @column({ isPrimary: true })
     public id: number
